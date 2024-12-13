@@ -30,6 +30,19 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+
+
+    // All requests we send go to this API endpoint.
+    // baseURL: 'https://staging.services.leadconnectorhq.com/contacts/',
+    extraHTTPHeaders: {
+      // We set this header per GitHub guidelines.
+      'Accept': 'application/json',
+      'Version': '2021-07-28',
+      // Add authorization token to all requests.
+      // Assuming personal access token available in the environment.
+      'Authorization': 'Bearer pit-282f97d3-37aa-4e3b-82b4-acf275920e5a',
+    },
   },
 
   /* Configure projects for major browsers */
@@ -77,3 +90,4 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
+
