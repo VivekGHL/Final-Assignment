@@ -44,16 +44,12 @@ export class CalendarPage{
     public async bookAppointment(){
         await this.page.locator(Locators.firstNameInput).fill('Viv')
         await this.page.locator(Locators.lastNameInput).fill('Viv')
-        const date = await this.page.locator('//span[@class="ml-2 text-capitalize"]').textContent()
-        // console.log(date)
+        
         await this.page.locator(Locators.phoneInput).pressSequentially('9876543210')
         await this.page.locator(Locators.emailInput).fill('Viv@viv.com')
         await this.page.locator(Locators.checkboxInput).click()
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(2000);
 
-        // await this.page.locator(Locators.bookAppointmentButton).click()
-        // await this.page.locator(Locators.confirmationText).isVisible()
-        // await expect(this.page.locator(Locators.confirmationText)).toContainText("Thank you")
     }
 
     public async addAppointmentDate() {
@@ -78,8 +74,16 @@ export class CalendarPage{
             randMonthValue = randMonthValue - 1;
             this.navigatetoNextmonth();
         }
-
-        await this.page.locator(Locators.firstSlot).click()
+        await this.page.waitForTimeout(1000);
+        await this.page.locator('//div[@class="multiselect__select"]').click();
+        await this.page.locator('//li[@id="null-0"]').click()
+        await this.page.waitForTimeout(1000);
+        if(await this.page.locator(Locators.pmFirstSlot).isVisible){
+            await this.page.locator(Locators.pmFirstSlot).click()
+        }
+        else{
+            await this.page.locator(Locators.amFirstSlot).click()
+        }
         await this.page.locator(Locators.submitButton).click()
     }
 

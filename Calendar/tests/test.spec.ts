@@ -1,6 +1,7 @@
 import { test, expect , Page, chromium } from '@playwright/test';
 import { Locators } from '../Locators/locators'
 import { CalendarPage } from '../page/page'
+import { time } from 'console';
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -19,7 +20,10 @@ let email : string;
 let phone : string;
 let startTime : string;
 let endTime : string;
+let timezone : string;
 
+let appointmentData
+let contactData
 test.describe("T1", async () =>{
 
     let page: Page;
@@ -56,6 +60,7 @@ test.describe("T1", async () =>{
         lname = responseBody.contact.last_name;
         email = responseBody.contact.email;
         phone = responseBody.contact.phone;
+        timezone = responseBody.contact.timezone;
 
         startTime = responseBody.appointment.start_time;
         endTime = responseBody.appointment.end_time;
@@ -80,7 +85,7 @@ test.describe("T1", async () =>{
             }
         )
         expect(contactResponse.status()).toBe(200);
-        const contactData = await contactResponse.json();
+        contactData = await contactResponse.json();
         expect(contactData.contact).toMatchObject({ 
             id : contactId,
             firstName: fname, 
@@ -102,7 +107,7 @@ test.describe("T1", async () =>{
             }
         )
         expect(appointmentResponse.status()).toBe(200);
-        const appointmentData = await appointmentResponse.json();
+        appointmentData = await appointmentResponse.json();
         expect(appointmentData.appointment).toMatchObject({
         appointmentStatus: 'confirmed',
         title: fname+' '+lname,
@@ -110,6 +115,18 @@ test.describe("T1", async () =>{
         locationId,
         // startTime: timeSlot,
         });
+    })
+
+    //Above Appointment is already booked in different timezone
+    test("Time Zone Validation", async ({ request }) =>{
+
+        //Validate subaccount timezone
+        expect(contactData.contact).toMatchObject({ 
+            timezone,
+        });
+        
+        //Varify time should be stored in IST for team member not in user's local timezone
+        expect(appointmentData.appointment.startTime).toContain("+05:30");
     })
 
 });

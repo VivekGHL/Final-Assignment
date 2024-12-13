@@ -3,7 +3,8 @@ export const Locators = {
     CalendarYearText : '//div[@class="vdpPeriodControl"]/button',
     CalendarMonthText : '//div[@class="vdpPeriodControl"]/button[@class="text-capitalize"]',
     submitButton : '//button[@class="hl_button --primary --first-step"]',
-    firstSlot : '//div[@id="am0"]',
+    amFirstSlot : '//div[@id="am0"]',
+    pmFirstSlot : '//div[@id="pm0"]',
 
     firstNameInput : '//input[@id="first_name"]',
     lastNameInput : '//input[@id="last_name"]',
