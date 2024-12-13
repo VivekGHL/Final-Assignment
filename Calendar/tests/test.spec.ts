@@ -1,16 +1,13 @@
 import { test, expect , Page, chromium } from '@playwright/test';
 import { Locators } from '../Locators/locators'
 import { CalendarPage } from '../page/page'
-import { time } from 'console';
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-}
 
 const contactBaseUrl = 'https://staging.services.leadconnectorhq.com/contacts/'
 const appointmentBaseUrl = 'https://staging.services.leadconnectorhq.com/calendars/events/appointments/'
 let contactId : string;
 let appointmentId : string;
 let locationId : string;
+let calendarId : string;
 const token = 'pit-282f97d3-37aa-4e3b-82b4-acf275920e5a'
 
 let name : string;
@@ -50,8 +47,7 @@ test.describe("T1", async () =>{
             await page.locator(Locators.bookAppointmentButton).click()
           ]);
         const responseBody = await appointmentResponseData.json();
-        console.log("Response Body:", responseBody);
-
+        // console.log("Response Body:", responseBody);
 
         appointmentId = responseBody.id;
         contactId = responseBody.contact.id;
@@ -61,6 +57,7 @@ test.describe("T1", async () =>{
         email = responseBody.contact.email;
         phone = responseBody.contact.phone;
         timezone = responseBody.contact.timezone;
+        calendarId = responseBody.contact.internal_source.id;
 
         startTime = responseBody.appointment.start_time;
         endTime = responseBody.appointment.end_time;
@@ -74,7 +71,7 @@ test.describe("T1", async () =>{
     });
 
     test("validate API response", async ({ request }) =>{
-
+        //Fetch contact details
         const contactResponse = await request.get(contactBaseUrl+contactId,
             {
                 headers: {
@@ -86,6 +83,7 @@ test.describe("T1", async () =>{
         )
         expect(contactResponse.status()).toBe(200);
         contactData = await contactResponse.json();
+        //Validate the Contact details with the filled details
         expect(contactData.contact).toMatchObject({ 
             id : contactId,
             firstName: fname, 
@@ -108,12 +106,13 @@ test.describe("T1", async () =>{
         )
         expect(appointmentResponse.status()).toBe(200);
         appointmentData = await appointmentResponse.json();
+        //Validate the appointment details
         expect(appointmentData.appointment).toMatchObject({
         appointmentStatus: 'confirmed',
         title: fname+' '+lname,
-        contactId: contactId,
+        contactId,
         locationId,
-        // startTime: timeSlot,
+        calendarId,
         });
     })
 

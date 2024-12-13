@@ -75,8 +75,8 @@ export class CalendarPage{
             this.navigatetoNextmonth();
         }
         await this.page.waitForTimeout(1000);
-        await this.page.locator('//div[@class="multiselect__select"]').click();
-        await this.page.locator('//li[@id="null-0"]').click()
+        await this.page.locator(Locators.timezoneDropDownbutton).click();
+        await this.page.locator(Locators.timezoneFirst).click()
         await this.page.waitForTimeout(1000);
         if(await this.page.locator(Locators.pmFirstSlot).isVisible){
             await this.page.locator(Locators.pmFirstSlot).click()

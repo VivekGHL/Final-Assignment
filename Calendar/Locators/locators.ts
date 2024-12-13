@@ -6,6 +6,9 @@ export const Locators = {
     amFirstSlot : '//div[@id="am0"]',
     pmFirstSlot : '//div[@id="pm0"]',
 
+    timezoneDropDownbutton : '//div[@class="multiselect__select"]',
+    timezoneFirst : '//li[@id="null-0"]',
+
     firstNameInput : '//input[@id="first_name"]',
     lastNameInput : '//input[@id="last_name"]',
     phoneInput : '//input[@id="phone"]',
