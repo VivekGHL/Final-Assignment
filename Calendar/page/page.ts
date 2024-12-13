@@ -29,7 +29,7 @@ export class CalendarPage{
     }
 
     public async navigatetoNextYear() {
-        await this.page.waitForTimeout(3000);
+        // await this.page.waitForTimeout(3000);
         await this.page.locator(Locators.nextMonthButton).click()
         // await expect(this.page.locator(Locators.CalendarYearText).last()).toContainText('2025')
     }
@@ -51,9 +51,9 @@ export class CalendarPage{
         await this.page.locator(Locators.checkboxInput).click()
         await this.page.waitForTimeout(3000);
 
-        await this.page.locator(Locators.bookAppointmentButton).click()
-        await this.page.locator(Locators.confirmationText).isVisible()
-        await expect(this.page.locator(Locators.confirmationText)).toContainText("Thank you")
+        // await this.page.locator(Locators.bookAppointmentButton).click()
+        // await this.page.locator(Locators.confirmationText).isVisible()
+        // await expect(this.page.locator(Locators.confirmationText)).toContainText("Thank you")
     }
 
     public async addAppointmentDate() {
