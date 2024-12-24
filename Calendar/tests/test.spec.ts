@@ -64,10 +64,9 @@ test.describe("T1", async () =>{
 
 
         await page.locator(Locators.confirmationText).isVisible()
+        //Confirm the booking
         await expect(page.locator(Locators.confirmationText)).toContainText("Thank you")
 
-        console.log("Appointment Start Time:", startTime);
-        console.log("Appointment End Time:", endTime);
     });
 
     test("validate API response", async ({ request }) =>{
