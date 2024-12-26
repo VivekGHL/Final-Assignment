@@ -23,9 +23,20 @@ export class NotificationsPage{
         await this.varifyText(Locators.notifications.walletSubSubHeader, Data.notifications.walletSubSubHeader)
     }
 
-    async varifyNotificationSwitchbutton(){
+    async switchButtonStatus(){
+        const ariaChecked = await this.page.locator(Locators.notifications.switchCheckStatus).getAttribute('aria-checked');
+        if(ariaChecked == 'false'){
+            return false;
+        }
+        return true;
+    }
+
+    async turnOnSwitchButton(){
         await this.wait(2000)
-        await this.page.locator(Locators.notifications.walletUsageMoneyInput).fill('50')
+        await this.page.locator(Locators.notifications.switchButton).click()
+    }
+    async turnOffSwitchButton(){
+        await this.wait(2000)
         await this.page.locator(Locators.notifications.switchButton).click()
         await this.wait(2000)
         await this.page.locator(Locators.notifications.disableButton).click()
@@ -33,7 +44,17 @@ export class NotificationsPage{
         //validate Notifications Disabled pop up is coming
         await this.varifyText(Locators.notifications.disableAlertPopUpHeader, Data.notifications.disableAlertPopUpHeader)
         await this.varifyText(Locators.notifications.disableAlertPopUpSubHeader, Data.notifications.disableAlertPopUpSubHeader)
-        // await this.page.locator(Locators.walletUsageMoneyInput).fill('50')
+    }
+
+    async varifyNotificationSwitchbutton(){
+        if(await this.switchButtonStatus()){
+            await this.turnOnSwitchButton()
+        }
+        await this.turnOffSwitchButton()
+        await this.turnOnSwitchButton()
+        
+        await this.page.locator(Locators.notifications.walletUsageMoneyInput).fill('50')
+        await this.page.locator(Locators.notifications.saveBtn).click()
     }
 
 }

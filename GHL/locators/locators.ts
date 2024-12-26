@@ -32,6 +32,7 @@ export const Locators = {
         disableAlertPopUp : '//div[@class="n-notification-main"]',
         disableAlertPopUpHeader : '//div[@class="n-notification-main__header"]',
         disableAlertPopUpSubHeader : '//div[@class="n-notification-main__description"]',
+        switchCheckStatus : '//div[@role="switch"]',
 
     }
 
