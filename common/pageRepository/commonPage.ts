@@ -1,8 +1,7 @@
 import {test, Page , expect } from '@playwright/test';
-import {Locators} from '../locators/locators';
-import {Data} from '../data/data'
+import {loginPageObjects} from '../objectRepository/login.object';
 
-export class LoginPage{
+export class CommonPage{
     readonly page : Page;
 
     constructor(page: Page){
@@ -18,17 +17,18 @@ export class LoginPage{
     }
 
     async loginWithCredential(email : string, password : string){
-        await this.page.locator(Locators.login.inputEmail).fill(email)
+        await this.page.locator(loginPageObjects.inputEmail).fill(email)
         await this.wait(1000);
-        await this.page.locator(Locators.login.inputPassword).fill(password)
+        await this.page.locator(loginPageObjects.inputPassword).fill(password)
         await this.wait(1000);
-        await this.page.locator(Locators.login.loginButton).click()
+        await this.page.locator(loginPageObjects.loginButton).click()
         await this.page.waitForLoadState('load');
     }
 
     async chooseAnAccount(accName : string){
-        await this.wait(1000);
-        await this.page.locator(Locators.login.chooseAnAccount(accName)).first().click()
+        await this.wait(2000);
+        expect(this.page.locator(loginPageObjects.chooseAnAccount(accName))).toBeVisible()
+        await this.page.locator(loginPageObjects.chooseAnAccount(accName)).first().click()
     }
 
 }
