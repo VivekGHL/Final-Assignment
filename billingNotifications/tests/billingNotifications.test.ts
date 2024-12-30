@@ -32,9 +32,14 @@ test.describe('GHL Platform', async () =>{
         await dashboardPage.navigateToBillingNotifications();
     })
 
-    test('Test Notification Page', async() => {
+    test('Verify Notification Page', async() => {
         await notificationsPage.varifyNotificationsPage();
+    })
+    test('Validate Notification Switch Button', async() => {
         await notificationsPage.varifyNotificationSwitchbutton();
+    })
+    test('verify add Emails section', async() => {
+        await notificationsPage.validateEmailSection();
     })
 
 });

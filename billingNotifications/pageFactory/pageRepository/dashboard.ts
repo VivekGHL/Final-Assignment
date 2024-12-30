@@ -10,7 +10,7 @@ export class Dashboard{
         this.page = page;
     }
 
-    async varifyText(loc : string, text : string, index : number = 0){
+    async verifyText(loc : string, text : string, index : number = 0){
         await expect(this.page.locator(loc).nth(index)).toContainText(text)
     }
 
@@ -22,13 +22,13 @@ export class Dashboard{
         await this.page.locator(agencyPageObject.dashboardHeader).isVisible();
         await this.wait(12000)
         //Validate Agency Dashboad Headings
-        await this.varifyText(agencyPageObject.dashboardHeader, agencyDashTestData.header)
-        await this.varifyText(agencyPageObject.dashboardSubHeader, agencyDashTestData.subHeader)
+        await this.verifyText(agencyPageObject.dashboardHeader, agencyDashTestData.header)
+        await this.verifyText(agencyPageObject.dashboardSubHeader, agencyDashTestData.subHeader)
         //Validate Agency Dashboard Satistics Headings
-        await this.varifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading1, 0)
-        await this.varifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading2, 1)
-        await this.varifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading3, 2)
-        await this.varifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading4, 3)
+        await this.verifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading1, 0)
+        await this.verifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading2, 1)
+        await this.verifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading3, 2)
+        await this.verifyText(agencyPageObject.dashboardStatisticsHeader, agencyDashTestData.statisticsHeading4, 3)
     }
 
     async navigateToBillingNotifications(){

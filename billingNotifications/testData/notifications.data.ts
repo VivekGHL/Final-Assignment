@@ -19,6 +19,10 @@ export const notificationsTestData = {
     notifiedDefaultEmail : 'viveks+test@gohighlevel.com',
     AgencyOwnerText : 'Agency Owner',
 
+    titleEmailPopUp : 'Notify Email addresses ',
+    descriptionEmailPopUp : 'You can add upto 5 email address to get notified about wallet usage.',
+    addUserText : 'Add more users',
+
     //Test amount
     incorrectAmount : {
         amount1 : 'ahkf',
@@ -49,6 +53,13 @@ export const notificationsTestData = {
         d2 : '1 Week',
         d3 : '2 Weeks',
         d4 : '1 Month',
+    },
+    //Emails
+    emails : {
+        email2 : 'automation+1@mail.com',
+        email3 : 'automation+2@mail.com',
+        email4 : 'automation+3@mail.com',
+        email5 : 'automation+4@mail.com',
     }
 
 }

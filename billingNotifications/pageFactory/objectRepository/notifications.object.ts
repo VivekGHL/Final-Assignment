@@ -36,5 +36,16 @@ export const notificationsPageObject = {
     notifiedDefaultEmail : '//div[@class="hl-card-header"]//div[text()="viveks+test@gohighlevel.com"]',
     AgencyOwnerText : '//div[@class="hl-card-header"]//div[text()="Agency Owner"]',
 
+    addEmailBtn : '//button[@id="add-emails-btn"]',
+    titleEmailPopUp : '//div[@class="title"]',
+    descriptionEmailPopUp : '//div[@class="description"]',
+    addUserText : '//span[@class="n-form-item-label__text"]',
+    addEmailBox : '//div[@class="n-base-selection-tags"]',
+    addEmailInput : '//input[@class="n-base-selection-input-tag__input"]',
+    cancelEmailbutton : '//button[@id="modal-footer-btn-negative-action"]',
+    saveMailButton : '//button[@id="modal-footer-btn-positive-action"]',
+    emailDropDown : '//div[@class="n-base-select-option__content"]//p',
+    removeEmailCross : '//i[@class="n-base-icon"]',
+
     
 }
